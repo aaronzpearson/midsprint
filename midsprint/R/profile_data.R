@@ -15,13 +15,14 @@
 #'
 profile_data <- function(data, speed_column, acceleration_column) {
   
-  speed_col = data[, grep(as.character(speed_column), colnames(data))]
-  accel_col = data[, grep(as.character(acceleration_column), colnames(data))]
+  speed_col = data[speed_column]
+  accel_col = data[acceleration_column]
   
-  df <- data.frame(speed_col,
-                   accel_col)
+  df <- data.frame(speed = speed_col,
+                   accel = accel_col)
   
   colnames(df) <- c("speed", "accel")
+  
   
   return(df)
   
