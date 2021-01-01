@@ -1,6 +1,5 @@
 #' Profile Data
 #'
-#' @param data
 #' @param speed_column
 #' @param acceleration_column
 #'
@@ -10,16 +9,13 @@
 #' @examples
 #' \dontrun {tracking_data <- data.frame(speed = rnorm(100, 4, 1),
 #' acceleration = rnorm(100, 2, 0.2))
-#' dat <- profile_data(tracking_data, "speed", "acceleration")
+#' dat <- profile_data(tracking_data$speed, tracking_data$acceleration)
 #' head(dat)}
 #'
-profile_data <- function(data, speed_column, acceleration_column) {
+profile_data <- function(speed, acceleration) {
   
-  speed_col = data[speed_column]
-  accel_col = data[acceleration_column]
-  
-  df <- data.frame(speed = speed_col,
-                   accel = accel_col)
+  df <- data.frame(speed = speed,
+                   accel = acceleration)
   
   colnames(df) <- c("speed", "accel")
   
