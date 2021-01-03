@@ -15,18 +15,16 @@
 #'
 #'
 player_plot_values <- function(player_profile) {
-
-  df <- player_profile
-
-  max_speed <- as.numeric(df[1])
-  player_tau <- as.numeric(df[3])
-
-
-  profile_plot_values <- data.frame(split_time = seq(0, 5, by = 0.01))
-  profile_plot_values$speed <- speed_time(max_speed, player_tau, profile_plot_values$split_time)
-  profile_plot_values$acceleration <- accel_time(max_speed, player_tau, profile_plot_values$split_time)
-  profile_plot_values$distance <- distance_time(max_speed, player_tau, profile_plot_values$split_time)
-
-  return(profile_plot_values)
-
+  
+  splits <- seq(0, 5, by = 0.01)
+  
+  s <- as.vector(unlist(sapply(splits, function(x) speed_time(player_profile, x))))
+  a <- as.vector(unlist(sapply(splits, function(x) accel_time(player_profile, x))))
+  d <- as.vector(unlist(sapply(splits, function(x) distance_time(player_profile, x))))
+  
+  data.frame(time_splits = splits,
+             speed = s,
+             acceleration = a,
+             distance = d)
+  
 }
