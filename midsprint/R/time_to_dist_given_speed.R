@@ -5,7 +5,6 @@
 #' @param current_speed The player's current speed
 #'
 #' @return
-#' @export
 #'
 #' @examples
 #' \dontrun {
