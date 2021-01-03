@@ -12,3 +12,5 @@ LazyData: true
 Imports: 
         lamW
 RoxygenNote: 7.1.1
+VignetteBuilder: knitr
+Suggests: knitr, rmarkdown
