@@ -1,0 +1,16 @@
+Package: midsprint
+Type: Package
+Title: midsprint
+Version: 0.1.0
+Date: 2021-01-07
+Author: "Aaron Pearson and Dani Chu"
+Maintainer: The package maintainer <aaronzpearson@outlook.com>
+Description: This package allows coaches and sports practitioners to model an athlete's force-velocity-power profile from positional tracking data.    Profiles can be built from velocities >= 0.    Version 0.1.0 is released as part of Aaron Pearson's 2021 Big Data Bowl submission.    The submission can be found here: www.github.io/aaronzpearson/portfolio
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: 
+        lamW
+RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)
