@@ -8,9 +8,9 @@ This package allows you to:
 * Profile players
 * Plot Speed-Acceleration curves
 * Compare athletes' Speed-Acceleration curves
+* Modeling which athlete will travel a given distance faster
 
 This package will be updated to provide more functionality including:
-* Modeling which athlete will travel a given distance faster
 * Potential player match-ups
 
 *midsprint* requires one dependency: lamW. The package was written predominantly in base R to avoid it breaking with package updates
