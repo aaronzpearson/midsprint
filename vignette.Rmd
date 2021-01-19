@@ -34,7 +34,7 @@ player_b_profile <- player_profile(player_b_data)
 
 This package was built to compliment the NFL Big Data Bowl 2021 Submission "5 Seconds or Less: Modeling Player Biomechanics to Predict Pass Outcomes" [[submission](https://www.kaggle.com/haljordan/modeling-player-biomechanics)]. Presently, this package is fairly rudimentary.
 
-{midsprint} alows you to model an athlete's kinetic and kinematic sprint mechanics *in-situ*[\^1]. Building player-profiles provides sports practitioners insight into an athlete's neuromuscular lower-limb potential. {midsprint} is does not encompass the force-velocity-power profile completely.
+{midsprint} alows you to model an athlete's kinetic and kinematic sprint mechanics *in-situ*. Building player-profiles provides sports practitioners insight into an athlete's neuromuscular lower-limb potential. {midsprint} is does not encompass the force-velocity-power profile completely.
 
 The submission [[link](https://www.kaggle.com/haljordan/modeling-player-biomechanics)] and package are the first to model athletes while in motion. Previous methods required that athletes' start a run with zero velocity.
 
@@ -248,5 +248,3 @@ This package will be updated to include:
 This package will continue being built with minimal dependencies.
 
 For questions or concerns, please reach out to Aaron Pearson at [aaronzpearson\@outlook.com](aaronzpearson@outlook.com)
-
-[\^1] Term coined by JB Morin and Samozino [[link](**research%20gate%20link**)]
