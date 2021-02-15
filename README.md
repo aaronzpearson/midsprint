@@ -1,6 +1,7 @@
 # midsprint
 
 A small package that accompanies the Big Data Bowl 2021 submission "5 Seconds or Less: Modeling player biomechanics to predict pass outcomes"
+For a simple walkthorugh, please visit https://aaronzpearson.github.io/assets/midsprint-vignette.pdf
 
 ### The Package
 
