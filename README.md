@@ -16,4 +16,4 @@ This package will be updated to provide more functionality including:
 *midsprint* requires one dependency: lamW. The package was written predominantly in base R to avoid it breaking with package updates
 
 Package authors:
-Aaron Pearson (aaronzpearson@outlook.com) and Dani Chu
+Aaron Pearson (aaronzpearson@outlook.com), Dani Chu, and Patrick Ward
