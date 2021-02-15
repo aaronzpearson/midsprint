@@ -1,11 +1,18 @@
 #' Time Speed
 #'
-#' @param player_profile player profile from player_profile function
-#' @param current_speed The player's current speed
+#' @param player_profile player profile
+#' @param current_speed the player's current speed
 #'
 #' @return How long it takes to reach max speed with a starting speed >= 0
 #'
-time_speed <- function(player_profile, current_speed) {
+#' @noRd
+time_speed <- function (player_profile, current_speed)
+{
+  UseMethod("time_speed")
+}
+
+
+time_speed.default <- function(player_profile, current_speed) {
   max_speed <- player_profile[[1]]
   player_tau <- player_profile[[3]]
 

@@ -4,9 +4,16 @@
 #'
 #' @return A player's unique tau value
 #'
-tau <- function(profile_data) {
+#' @noRd
+tau <- function (game_data)
+{
+  UseMethod("tau")
+}
 
-  df <- profile_data
+
+tau.default <- function(game_data) {
+
+  df <- game_data
   max_s <- max(df$speed, na.rm = T)
   max_a <- max(df$accel, na.rm = T)
 

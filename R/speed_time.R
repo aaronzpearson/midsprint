@@ -1,11 +1,18 @@
 #' Speed over time
 #'
-#' @param player_profile player profile from player_profile function
-#' @param split_time Time
+#' @param player_profile player profile
+#' @param split_time duration of time
 #'
 #' @return Speed the player reaches at a given time from zero velocity
 #'
-speed_time <- function(player_profile, split_time) {
+#' @noRd
+speed_time <- function (player_profile, split_time)
+{
+  UseMethod("speed_time")
+}
+
+
+speed_time.default <- function(player_profile, split_time) {
 
   max_speed <- player_profile[[1]]
   player_tau <- player_profile[[3]]

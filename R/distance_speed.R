@@ -1,11 +1,21 @@
 #' Distance Reached at a Given Speed
 #'
-#' @param player_profile Player's f-v-p profile
-#' @param current_speed Player's current speed
+#'@description
+#'This function returns the distance a player travels
 #'
-#' @return The distance a player can run to reach a given speed from a velocity >= 0
+#' @param speed speed of interest
+#' @param player_profile player's f-v-p profile
 #'
-distance_speed <- function(player_profile, current_speed) {
+#' @return The distance a player must run to reach a given speed from a velocity >= 0
+#'
+#' @noRd
+distance_speed <- function (player_profile, current_speed)
+{
+  UseMethod("distance_speed")
+}
+
+
+distance_speed.default <- function(player_profile, current_speed) {
 
   df <- player_profile
   max_speed <- df[[1]]

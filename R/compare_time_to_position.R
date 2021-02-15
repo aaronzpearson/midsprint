@@ -11,7 +11,16 @@
 #' @export
 #'
 #' @examples
-compare_time_to_position <- function(player_1_profile, player_1_speed, player_1_distance, player_2_profile, player_2_speed, player_2_distance) {
+compare_time_to_position <- function (player_1_profile, player_1_speed, player_1_distance,
+                                     player_2_profile, player_2_speed, player_2_distance)
+{
+  UseMethod("compare_time_to_position")
+}
+
+#' @export
+
+compare_time_to_position.default <- function(player_1_profile, player_1_speed, player_1_distance,
+                                             player_2_profile, player_2_speed, player_2_distance) {
 
   player_1_time_to_pos <- time_to_position(player_1_profile, player_1_speed, player_1_distance)
   player_2_time_to_pos <- time_to_position(player_2_profile, player_2_speed, player_2_distance)

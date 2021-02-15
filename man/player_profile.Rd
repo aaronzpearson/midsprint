@@ -16,11 +16,9 @@ A player's unique profile
 Player Profile
 }
 \examples{
-\dontrun {tracking_data <- data.frame(speed = rnorm(100, 4, 1),,
-acceleration = rnorm(100, 2, 0.2))
-dat <- profile_data(tracking_data, "speed", "acceleration")
-head(dat)
-player <- player_profile(dat)
-print(player)}
+data(player_a)
+player_a_data <- tracking_data(player_a$speed, player_a$accel)
+player_a_profile <- player_profile(player_a_data)
+player_a_profile
 
 }

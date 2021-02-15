@@ -1,13 +1,19 @@
 #' Time to Reach a Distance Starting from a Given Speed
 #'
-#' @param player_profile Player's f-v-p profile
-#' @param distance Distance to travel
-#' @param current_speed The player's current speed
+#' @param player_profile player profile
+#' @param distance distance to travel
+#' @param current_speed the player's current speed
 #'
-#' @return
+#' @return helper function
 #'
-#' @examples
-time_to_dist_given_speed <- function(player_profile, distance, current_speed) {
+#' @noRd
+time_to_dist_given_speed <- function (player_profile, distance, current_speed)
+{
+  UseMethod("time_to_dist_given_speed")
+}
+
+
+time_to_dist_given_speed.default <- function(player_profile, distance, current_speed) {
 
   df <- player_profile
   max_speed <- df[[1]]

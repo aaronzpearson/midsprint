@@ -1,10 +1,21 @@
 #' Distance Over Time
 #'
+#' @description
+#' This function returns the distance an athlete can travel over a distinct duration when starting with
+#' velocity = 0
+#'
 #' @param player_profile player profile from player_profile function
-#' @param split_time Time
+#' @param split_time duration of time
 #'
 #' @return The distance traveled over a given amount of time from zero velocity
 #'
+#' @noRd
+distance_time <- function (player_profile, split_time)
+{
+  UseMethod("distance_time")
+}
+
+
 distance_time <- function(player_profile, split_time) {
 
   max_speed <- player_profile[[1]]
