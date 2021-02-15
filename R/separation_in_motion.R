@@ -27,7 +27,7 @@ separation_in_motion.default <- function(player_1_profile, player_1_speed, playe
  player2_dist_travelled <- distance_time(player_2_profile, player1_time_to_pos + player2_time_speed) -
    distance_time(player_2_profile, player2_time_speed)
 
- dist_diff = player_1_distance - player2_dist_travelled + (player_1_distance - player_2_distance)
+ dist_diff = player_1_distance - player2_dist_travelled
 
  start <- "Player A"
  middle <- ifelse(dist_diff < 0, "trails", "is ahead of")
@@ -38,3 +38,4 @@ separation_in_motion.default <- function(player_1_profile, player_1_speed, playe
 
 
 }
+
