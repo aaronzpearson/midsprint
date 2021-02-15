@@ -4,7 +4,7 @@
 \alias{separation_distance}
 \title{Title}
 \usage{
-separation_distance(player_1_profile, player_2_profile, dist_player_1_from_2)
+separation_distance(player_1_profile, player_2_profile, distance_to_travel)
 }
 \arguments{
 \item{dist_of_player_1}{}
