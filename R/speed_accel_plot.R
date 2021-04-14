@@ -32,8 +32,9 @@ speed_accel_plot.default <- function(game_data) {
   colnames(player_values) <- c("speed", "accel", "vel_bins")
   model_df <- data.frame(accel = c(0, speed_accel(game_data)[[1]]),
                          speed = c(speed_accel(game_data)[[2]], 0))
+  game_data_short <- game_data[sample(1:nrow(game_data), 5000, replace = T),]
 
-  speed_accel_p <- plot(accel ~ speed, data = game_data,
+  speed_accel_p <- plot(accel ~ speed, data = game_data_short,
                         col = "grey", pch = 20,
                         xlim = c(0, model_df[1,2] + 1),
                         ylim = c(0, model_df[2,1] + 1),
