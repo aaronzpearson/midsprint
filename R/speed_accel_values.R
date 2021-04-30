@@ -26,7 +26,7 @@ speed_accel_values.default <- function(game_data) {
   )
 
   player_temp <- player_temp[player_temp[, "df.speed"] >= 3, ]
-  player_temp$vel_bins <- cut(player_temp$df.speed, seq(3, max(df$speed), by = 0.2))
+  player_temp$vel_bins <- cut(player_temp$df.speed, seq(3, max(df$speed, na.rm = T), by = 0.2))
 
   player_temp <- player_temp[order(player_temp$df.accel), ]
   temp <- by(player_temp, player_temp["vel_bins"], tail, 2)
