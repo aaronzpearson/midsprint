@@ -1,16 +1,30 @@
 Package: midsprint
 Type: Package
-Title: midsprint
-Version: 0.1.0
-Date: 2021-01-07
-Author: "Aaron Pearson and Dani Chu"
-Maintainer: The package maintainer <aaronzpearson@outlook.com>
-Description: This package allows coaches and sports practitioners to model an athlete's force-velocity-power profile from positional tracking data.    Profiles can be built from velocities >= 0.    Version 0.1.0 is released as part of Aaron Pearson's 2021 Big Data Bowl submission.    The submission can be found here: www.github.io/aaronzpearson/portfolio
-License: What license is it under?
+Title: {midsprint} makes building in-game player profiles easy
+Version: 0.2.0
+Authors@R: 
+    c(person("Aaron", 
+            "Pearson", email = "aaronzpearson@outlook.com", 
+            role = c("cre", "aut")), 
+      person("Dani", 
+            "Chu", 
+            role = "aut"), 
+      person("Patrick", 
+            "Ward", 
+            role = "aut"))
+Description: {midsprint} is a lightweight RStats package that allows sports scientists to build aspects of an athlete's force-velocity-power (fvp) profile from game data.
+    By following the vignette (sample walkthrough provided in .pdf format), you can create player reports in minutes. 
+    If you would like to reach out and talk, have any issues, or suggest changes, please send an email Aaron Pearson (aaronzpearson@outlook.com). 
 Encoding: UTF-8
 LazyData: true
 Imports: 
-        lamW
+        lamW,
+        glue,
+        ggplot2,
+        patchwork
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 RoxygenNote: 7.1.1
 Depends: 
-    R (>= 2.10)
+  R (>= 3.5.0)

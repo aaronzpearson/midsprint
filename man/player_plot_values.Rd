@@ -7,11 +7,14 @@
 player_plot_values(player_profile)
 }
 \arguments{
-\item{player_profile}{Must run player_profile function before player_plot_value function}
+\item{player_profile}{A data.frame built using the game_profile or combine_profile functions.}
 }
 \value{
-Plot values for f-v-p profile
+Speed, acceleration, and distance values in relation to speed.
 }
 \description{
-Player Plot Values
+The player_profile parameter is the player's game or optimal profile. These values are taken from in-game or 40 yd dash data and modeled to represent an athlete's sprint mechanics.
+
+Formulas are based off works by Morin, Samozino, Clark, etc.
+This function is not exported.
 }
