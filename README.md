@@ -1,3 +1,7 @@
+# NOTE: this is a drafted version of update 0.2.0 - there are still bugs to work out
+# NOTE: there is no vignette and many of the old functions have changed dramatically
+# NOTE: please wait for the official release before using
+
 # midsprint
 
 A small package that accompanies the Big Data Bowl 2021 submission "5 Seconds or Less: Modeling player biomechanics to predict pass outcomes"
