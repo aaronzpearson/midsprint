@@ -2,34 +2,26 @@
 % Please edit documentation in R/speed_accel.R
 \name{speed_accel}
 \alias{speed_accel}
-\title{Speed Acceleration Model Fit}
+\alias{accel_speed}
+\title{Speed-Acceleration Model}
 \usage{
 speed_accel(game_data)
+
+accel_speed(game_data)
 }
 \arguments{
-\item{game_data}{}
+\item{game_data}{An athlete's game data.}
 }
 \value{
-Modeled athlete max speed and max accel values, model fit (r_squared), and number of observations kept in the final model output.
+An athlete's theoretical max speed and max accel.
 }
 \description{
-This function is based on the **in-situ** speed-acceleration model, originally suggested by Morin and
-colleagues. It is currently written as efficiently as possible. Please keep in mind that larger
-data set will require more time to process.
+This function returns an athlete's theoretical maximal speed and acceleration from their game data, called using the game_data function.
+When called upon, you will see the athlete's information displayed in the console. When you save the function to an object, it will return a data.frame with the player's information. The data.frame is less formatted than the original call but contains the same information.
 
-The function returns a data.frame containing a player's in-situ max speed and acceleration values,
-model fit (r_square), and number of observations (n_observation) kept in the final model output. This
-funciton is written to return models with r_square values above 0.95. Well-fit models should return
-approximately 45-65 observations.
+The model relies on multiple helper functions. These functions convert the original game data to metric, and the linear model is fit using a least squares regression. The model is fit to a minimum r squared value of 0.95.
 
-Processing time: approximately 0.01s per 1000 observations
-}
-\details{
-This function returns a data.frame containing a player's in-situ speed-acceleration values
-}
-\examples{
-data(player_a)
-player_a_data ,- tracking_data(player_a$speed, player_a$accel)
-player_a_insitu_model <- speed_accel_model(player_a_data)
-print(player_a_insitu_model)
+The speed-acceleration function is modelled based on Morin and colleagues work: https://www.researchgate.net/publication/351607405_Individual_acceleration-speed_profile_in-situ_A_proof_of_concept_in_professional_football_players
+
+You can also call upon accel_speed for the same output.
 }

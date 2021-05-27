@@ -2,28 +2,27 @@
 % Please edit documentation in R/game_data.R
 \name{game_data}
 \alias{game_data}
-\title{Player Game Tracking Data}
+\alias{player_data}
+\title{Game Data}
 \usage{
-game_data(speed, acceleration)
+game_data(speed, acceleration, units = "m/s", player_name = NULL)
+
+player_data(speed, acceleration, units = "m/s", player_name = NULL)
 }
 \arguments{
-\item{speed}{speed vector from raw data}
+\item{speed}{In-game athlete speed vector.}
 
-\item{acceleration}{acceleration vector from raw data}
+\item{acceleration}{In-game athlete acceleration vector.}
+
+\item{units}{Units used by the tracking system.}
+
+\item{player_name}{Athlete name - if not provided, an arbitrary player number is assigned.}
 }
 \value{
-Returns a simplified data frame containing an athlete's speed and acceleration values
+Athlete game data for modeling.
 }
 \description{
-game_data() is included in the **midsprint** work flow to provide coaches with a simple method
-of cleaning positional tracking data. It also reduces overhead associated with large data sets. Doing
-so allows the **midsprint** package to run quickly, smoothly, and efficiently.
-}
-\details{
-This function returns a player's tracking data data frame.
-}
-\examples{
-data(player_a)
-player_a_data <- tracking_data(player_a$speed, player_a$accel)
-head(player_a_data)
+This function simplifies large data sets that are provided by positional tracking companies to four variables: speed, acceleration, units, and athlete name. This allows the {midsprint} package to model player profiles while maintaining a small footprint on the computer's memory.
+
+Please note that the units input are those associated with the athlete's speed. If speed and acceleration are recorded in different units, please convert to a consistent format before using this function. You can do this using the conversion_factor function to calculate the conversion constant.
 }

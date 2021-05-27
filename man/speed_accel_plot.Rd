@@ -2,29 +2,29 @@
 % Please edit documentation in R/speed_accel_plot.R
 \name{speed_accel_plot}
 \alias{speed_accel_plot}
-\title{In-Situ Speed-Acceleration Plot}
+\alias{accel_speed_plot}
+\title{Speed-Acceleration Plot}
 \usage{
-speed_accel_plot(game_data)
+speed_accel_plot(game_data, ...)
+
+accel_speed_plot(game_data, ...)
 }
 \arguments{
-\item{game_data}{}
+\item{game_data}{An athlete's game data - required.}
+
+\item{...}{Other game data - optional.}
 }
 \value{
-In-situ speed-accel player profile plot
+A speed-acceleration plot for 1+ athletes.
 }
 \description{
-The plot returned includes the following components:
-* all data player observations (grey)
-* final observations modeled (red)
-* regression line (black line)
-* legend containing player details (modeled max speed, acceleration, and tau)
-}
-\details{
-This model returns a player's in-situ speed-acceleration plot
-}
-\examples{
-data(player_a)
-player_a_data <- tracking_data(player_a$speed, player_a$accel)
-player_a_insitu_plot <- speed_accel_plot(player_a_data)
-player_a_insitu_plot
+This function returns an athlete's speed-acceleration plot.
+
+When a single athlete's game_data is provided, the plot returns a plot with three layers: 1. a sample of 5000 observations from their game data, 2. points that are demarcated in a different color, indicating that they were utilized in building the linear model, and 3. the linear model itself in the form of a line of least squares. Multiple athletes on a plot will only return their linear models, in the form of a line of least squares.
+
+An athlete's information is placed at the bottom of the graph. Information in the plot legend includes the athlete's name, their theoretical max speed, and their theoretical max accel. Although this might not be aesthetically pleasing for single player plots, it is efficient for multiple players. It is also cleaner when this graph is included in player reports.
+
+You can also call on accel_speed_plot to render the same plot.
+
+WARNING: All values returned will be in the original units provided in the game_data function. If players have different units associated to their game_data, the units from the first athlete on the list will be utilized.
 }

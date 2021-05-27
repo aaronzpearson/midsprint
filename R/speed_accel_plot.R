@@ -1,58 +1,150 @@
-#' In-Situ Speed-Acceleration Plot
+
+#' Speed-Acceleration Plot
 #'
-#' This model returns a player's in-situ speed-acceleration plot
+#' @param game_data An athlete's game data - required.
+#' @param ... Other game data - optional.
 #'
-#' @param game_data
+#' @return A speed-acceleration plot for 1+ athletes.
 #'
 #' @description
-#' The plot returned includes the following components:
-#' * all data player observations (grey)
-#' * final observations modeled (red)
-#' * regression line (black line)
-#' * legend containing player details (modeled max speed, acceleration, and tau)
+#' This function returns an athlete's speed-acceleration plot.
 #'
-#' @return In-situ speed-accel player profile plot
-#' @export
+#' When a single athlete's game_data is provided, the plot returns a plot with three layers: 1. a sample of 5000 observations from their game data, 2. points that are demarcated in a different color, indicating that they were utilized in building the linear model, and 3. the linear model itself in the form of a line of least squares. Multiple athletes on a plot will only return their linear models, in the form of a line of least squares.
 #'
-#' @examples
-#' data(player_a)
-#' player_a_data <- tracking_data(player_a$speed, player_a$accel)
-#' player_a_insitu_plot <- speed_accel_plot(player_a_data)
-#' player_a_insitu_plot
-speed_accel_plot <- function (game_data)
-{
-  UseMethod("speed_accel_plot")
-}
-
+#' An athlete's information is placed at the bottom of the graph. Information in the plot legend includes the athlete's name, their theoretical max speed, and their theoretical max accel. Although this might not be aesthetically pleasing for single player plots, it is efficient for multiple players. It is also cleaner when this graph is included in player reports.
+#'
+#' You can also call on accel_speed_plot to render the same plot.
+#'
+#' WARNING: All values returned will be in the original units provided in the game_data function. If players have different units associated to their game_data, the units from the first athlete on the list will be utilized.
 #' @export
+speed_accel_plot <- function(game_data, ...) {
 
-speed_accel_plot.default <- function(game_data) {
-
-  player_values <- speed_accel_values(game_data)
-  colnames(player_values) <- c("speed", "accel", "vel_bins")
-  model_df <- data.frame(accel = c(0, speed_accel(game_data)[[1]]),
-                         speed = c(speed_accel(game_data)[[2]], 0))
-  game_data_short <- game_data[sample(1:nrow(game_data), 5000, replace = T),]
-
-  speed_accel_p <- plot(accel ~ speed, data = game_data_short,
-                        col = "grey", pch = 20,
-                        xlim = c(0, model_df[1,2] + 1),
-                        ylim = c(0, model_df[2,1] + 1),
-                        xaxs = "i",
-                        yaxs = "i",
-                        ylab = "Acceleration (yd/s/s)",
-                        xlab = "Speed (yd/s)",
-                        main = "Player Speed-Acceleration Profile")
-  lines(accel ~ speed, data = model_df)
-  points(df.accel ~ df.speed, speed_accel_points(game_data),
-         col = "black")
-  points(df.accel ~ df.speed, speed_accel_points(game_data),
-         col = "red", pch = 20)
-  legend("topright", c(paste("Projected Max Speed:", round(model_df[1,2], 2)),
-                          paste("Projected Max Accel:", round(model_df[2,1], 2)),
-                          paste("Tau:", round(model_df[1,2]/ model_df[2,1], 2))),
-         col = c("black","red", "grey"), pch = 17)
-
-  recordPlot(speed_accel_p)
+ UseMethod("speed_accel_plot")
 
   }
+
+#' @export
+speed_accel_plot.default <- function(game_data, ...) {
+
+  # create list of all game data
+  game_data_list <- list(game_data, ...)
+
+  # applies sa_plot_observations to each data set
+  # then binds all data sets
+
+  # in the form of:
+  # df(speed = speed_in_metric,
+  #    accel = accel_in_metric,
+  #    game_speed = speed_in_original_unit,
+  #    game_accel = accel_in_original_inits,
+  #    ...)
+  #    ... = sa_muted values and label built off them
+  player_speed_accel_points <- do.call(rbind, lapply(game_data_list, sa_plot_observations))
+
+  # number of players in the plot
+  n_games <- length(game_data_list)
+
+  # plotting aesthetics
+  max_s <- conversion_factor(max(player_speed_accel_points$theoretical_max_speed),
+                             units = game_data$units[1]) + 1
+  max_a <- conversion_factor(max(player_speed_accel_points$theoretical_max_accel),
+                             units = game_data$units[1]) + 1
+
+  # if else for 1 or 2+ players
+  if(n_games == 1) {
+
+    # take sample 5k points from data set
+    # decreases rendering time
+    game_data_sample <- game_data[sample(1:nrow(game_data), 5000, replace = T),]
+
+    # build single player plot
+    p <- sa_plot_base(game_data, max_s, max_a) +
+      annotate("text", x = 1, y = 1,
+               label = "Built with {midsprint} by @aaronzpearson",
+               colour = "white") +
+      # points from asample data
+      geom_point(data = game_data_sample,
+                 aes(x = game_speed, y = game_accel),
+                 colour = "grey", alpha = 0.3) +
+      # points from sa_plot_observations
+      # returned in  original units
+      geom_point(data = player_speed_accel_points,
+                 aes(x = game_speed, y = game_accel, colour = player_label),
+                 size = 2, show.legend = TRUE) +
+      # linear fit to the sa_plot_observations
+      geom_smooth(data = player_speed_accel_points,
+                  aes(x = game_speed, y = game_accel, colour = player_label),
+                  se = F, method = "lm", fullrange = T,
+                  show.legend = FALSE, size = 1.5, alpha = 0.8)
+
+    } else {
+
+    # build multi-player plot
+    p <- sa_plot_base(game_data, max_s, max_a) +
+      annotate("text", x = 1, y = 1,
+               label = "Built with {midsprint} by @aaronzpearson",
+               colour = "white") +
+      # linear fit to all players in the data set
+      geom_smooth(data = player_speed_accel_points,
+                  aes(x = game_speed, y = game_accel, colour = player_label),
+                  se = F, method = "lm", fullrange = T,
+                  show.legend = TRUE, size = 2)
+
+
+  }
+
+  # print to 'plot'
+  # suppresses messages and warning from ggplot for cleaner output in the console
+  # limits error traceback and trouble-shooting
+    # unintentionally done
+  p
+
+  }
+
+#' @export
+#' @rdname speed_accel_plot
+accel_speed_plot <- function(game_data, ...) {
+
+  # alternative call to speed_accel_plot
+  speed_accel_plot(game_data, ...)
+
+  }
+
+# helper functions --------------------------------------------------------
+
+# These functions feed into speed_accel_plot() and are not exported
+# No documentation is provided for these function
+# All function information is included within the function as a comment
+
+sa_plot_base <- function(game_data, max_s = max_s, max_a = max_a) {
+
+  # helper to label objects
+  units <- game_data$units[1]
+  distance <- strsplit(units, "/")[[1]][1]
+  duration <- strsplit(units, "/")[[1]][2]
+
+  # labels
+  y_lab <- paste0("Acceleration (", distance,"/", duration, "/", duration, ")")
+  x_lab <- paste0("Speed (", distance,"/", duration, ")")
+
+  # build aesthetics of speed-accel plots
+  ggplot() +
+    theme_classic() +
+    xlab(x_lab) + ylab(y_lab) +
+    scale_x_continuous(expand = c(0, 0), limits = c(0, (max_s + 1)), breaks = seq(0, max_s, by = 2)) +
+    scale_y_continuous(expand = c(0, 0), limits = c(0, (max_a + 1)), breaks = seq(0, max_s, by = 2)) +
+    # please do not edit
+    # packages are tough to write and compile
+    # this provides the author(s) with recognition
+    labs(title = "In-Game Speed-Acceleration Model",
+         subtitle = "Built with {midsprint} by @aaronzpearson",
+         colour = "") +
+    # distinct player colours
+    scale_colour_brewer(palette = "Set1") +
+    theme(plot.subtitle = element_text(hjust = 0.5,
+                                       color = "#666666",
+                                       size = 8),
+          plot.title = element_text(hjust = 0.5),
+          legend.position = "bottom")
+
+}

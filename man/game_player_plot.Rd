@@ -2,16 +2,23 @@
 % Please edit documentation in R/game_player_plot.R
 \name{game_player_plot}
 \alias{game_player_plot}
-\title{Speed and Acceleration Plots over Time}
+\alias{game_athlete_plot}
+\title{Game Player Plot}
 \usage{
-game_player_plot(player_profile)
+game_player_plot(game_profile, ...)
+
+game_athlete_plot(game_profile, ...)
 }
 \arguments{
-\item{player_profile}{player profile}
+\item{game_profile}{An athlete's game profile - required.}
+
+\item{...}{Other game profiles - optional.}
 }
 \value{
-A player's speed and acceleration curves over time
+Time vs speed and acceleration for 1+ athletes.
 }
 \description{
-This function returns a player's in-situ speed and acceleration v time curves
+This function returns two curves per athlete: time versus speed and time versus acceleration. The curve moving downward is time versus acceleration, and the curve moving upward is time versus acceleration.
+
+This function replaces previously published functions game_player_plot and compare_profile_plot. This function also has much simpler syntax, requiring only one argument with an indefinite number of player profiles possible.
 }
