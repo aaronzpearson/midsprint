@@ -31,6 +31,7 @@ game_data.default <- function(speed, acceleration, units = "m/s", player_name = 
                    game_accel = acceleration,
                    athlete = player_name,
                    units = units)
+  df$units <- as.character(df$units)
 
   colnames(df) <- c("game_speed",
                     "game_accel",
