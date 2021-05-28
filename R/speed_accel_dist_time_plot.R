@@ -37,12 +37,12 @@ speed_accel_time_distance_plot.default <- function(game_data, ...) {
   player_dist_time_points <- do.call(rbind, lapply(game_data_list, sa_dist_time_values))
 
   p <- sa_dist_time_plot_base(game_data) +
-    annotate("text", x = 1, y = 1,
+    ggplot2::annotate("text", x = 1, y = 1,
              label = "Built with {midsprint} by @aaronzpearson",
              colour = "white") +
     # linear fit to all players in the data set
-    geom_point(data = player_dist_time_points,
-               aes(x = time_splits, y = distance, colour = player_label),
+    ggplot2::geom_point(data = player_dist_time_points,
+                        ggplot2::aes(x = time_splits, y = distance, colour = player_label),
                show.legend = TRUE, size = 1.5)
 
   p
@@ -69,7 +69,7 @@ sa_dist_time_values <- function(game_data) {
 
   player_prof <- sa_muted(game_data)
   sa_dist_time <- player_plot_values(player_prof)
-  sa_dist_time$player_label <- glue("{player_prof$player}
+  sa_dist_time$player_label <- glue::glue("{player_prof$player}
        Max Speed = {player_prof$theoretical_max_speed}
        Max Accel = {player_prof$theoretical_max_accel}  ")
 
@@ -88,22 +88,24 @@ sa_dist_time_plot_base <- function(game_data) {
   x_lab <- paste0("Time (", duration, ")")
 
   # build aesthetics of speed-accel plots
-  ggplot() +
-    theme_classic() +
-    xlab(x_lab) + ylab(y_lab) +
-    xlim(c(0, 5)) + ylim(c(0, 50)) +
+  ggplot2::ggplot() +
+    ggplot2::theme_classic() +
+    ggplot2::xlab(x_lab) +
+    ggplot2::ylab(y_lab) +
+    ggplot2::xlim(c(0, 5)) +
+    ggplot2::ylim(c(0, 50)) +
     # please do not edit
     # packages are tough to write and compile
     # this provides the author(s) with recognition
-    labs(title = "Distance-Time Player Comparison",
+    ggplot2::labs(title = "Distance-Time Player Comparison",
          subtitle = "Built with {midsprint} by @aaronzpearson",
          colour = "") +
     # distinct player colours
-    scale_colour_brewer(palette = "Set1") +
-    theme(plot.subtitle = element_text(hjust = 0.5,
+    ggplot2::scale_colour_brewer(palette = "Set1") +
+    ggplot2::theme(plot.subtitle = ggplot2::element_text(hjust = 0.5,
                                        color = "#666666",
                                        size = 8),
-          plot.title = element_text(hjust = 0.5),
+          plot.title = ggplot2::element_text(hjust = 0.5),
           legend.position = "bottom")
 
 }
@@ -119,16 +121,18 @@ sa_dist_time_report_plot_base <- function(game_data) {
   x_lab <- paste0("Time (", duration, ")")
 
   # build aesthetics of speed-accel plots
-  ggplot() +
-    theme_bw() +
-    xlab(x_lab) + ylab(y_lab) +
-    xlim(c(0, 5)) + ylim(c(0, 50)) +
+  ggplot2::ggplot() +
+    ggplot2::theme_bw() +
+    ggplot2::xlab(x_lab) +
+    ggplot2::ylab(y_lab) +
+    ggplot2::xlim(c(0, 5)) +
+    ggplot2::ylim(c(0, 50)) +
     # distinct player colours
-    scale_colour_brewer(palette = "Set1") +
-    theme(plot.subtitle = element_text(hjust = 0.5,
+    ggplot2::scale_colour_brewer(palette = "Set1") +
+    ggplot2::theme(plot.subtitle = ggplot2::element_text(hjust = 0.5,
                                        color = "#666666",
                                        size = 8),
-          plot.title = element_text(hjust = 0.5),
+          plot.title = ggplot2::element_text(hjust = 0.5),
           legend.position = "bottom")
 
 }
@@ -151,12 +155,12 @@ speed_accel_dist_time_report_plot <- function(game_data, ...) {
   player_dist_time_points <- do.call(rbind, lapply(game_data_list, sa_dist_time_values))
 
   p <- sa_dist_time_report_plot_base(game_data) +
-    annotate("text", x = 1, y = 1,
+    ggplot2::annotate("text", x = 1, y = 1,
              label = "Built with {midsprint} by @aaronzpearson",
              colour = "white") +
     # linear fit to all players in the data set
-    geom_point(data = player_dist_time_points,
-               aes(x = time_splits, y = distance, colour = player_label),
+    ggplot2::geom_point(data = player_dist_time_points,
+                        ggplot2::aes(x = time_splits, y = distance, colour = player_label),
                show.legend = FALSE, size = 1.5)
 
   p

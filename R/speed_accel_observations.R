@@ -145,7 +145,7 @@ sa_plot_observations <- function(game_data) {
   # creates player labels
   # used for player colour in the plot
   # glue::glue returns a multi-line string for cleaner labeling
-  df$player_label <-   glue("{df$player}
+  df$player_label <-   glue::glue("{df$player}
        Max Speed = {df$theoretical_max_speed}
        Max Accel = {df$theoretical_max_accel}  ")
 

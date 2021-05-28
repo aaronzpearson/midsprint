@@ -8,10 +8,10 @@ Authors@R:
             role = c("cre", "aut")), 
       person("Dani", 
             "Chu", 
-            role = "aut"), 
+            role = c("aut")), 
       person("Patrick", 
             "Ward", 
-            role = "aut"))
+            role = c("aut")))
 Description: {midsprint} is a lightweight RStats package that allows sports scientists to build aspects of an athlete's force-velocity-power (fvp) profile from game data.
     By following the vignette (sample walkthrough provided in .pdf format), you can create player reports in minutes. 
     If you would like to reach out and talk, have any issues, or suggest changes, please send an email Aaron Pearson (aaronzpearson@outlook.com). 

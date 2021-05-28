@@ -19,11 +19,11 @@ combine_time_distance_plot.default <- function(combine_profile, ...) {
   player_speed_accel_points <- do.call(rbind, lapply(combine_data_list, combine_speed_accel_values))
 
   p <- game_time_distance_plot_base(combine_profile) +
-    annotate("text", x = 1, y = 1,
+    ggplot2::annotate("text", x = 1, y = 1,
              label = "Built with {midsprint} by @aaronzpearson",
              colour = "white") +
-    geom_point(data = player_speed_accel_points,
-               aes(x = time_splits, y = combine_distance, colour = player_label),
+    ggplot2::geom_point(data = player_speed_accel_points,
+                        ggplot2::aes(x = time_splits, y = combine_distance, colour = player_label),
                show.legend = TRUE, size = 1.5,alpha = 0.5)
 
   p
@@ -46,22 +46,23 @@ combine_time_distance_plot_base <- function(combine_profile) {
   x_lab <- paste0("Time (", duration, ")")
   y_lab <- paste0("Distance (", distance, ")")
 
-  ggplot() +
-    theme_classic() +
-    xlab(x_lab) + ylab(y_lab) +
-    xlim(c(0, 5)) + ylim(c(0, 50)) +
+  ggplot2::ggplot() +
+    ggplot2::theme_classic() +
+    ggplot2::xlab(x_lab) +
+    ggplot2::ylab(y_lab) +
+    ggplot2::xlim(c(0, 5)) + ylim(c(0, 50)) +
     # please do not edit
     # packages are tough to write and compile
     # this provides the author(s) with recognition
-    labs(title = "Combine Time vs. Distance",
+    ggplot2::labs(title = "Combine Time vs. Distance",
          subtitle = "Built with {midsprint} by @aaronzpearson",
          colour = "") +
     # distinct player colours
-    scale_colour_brewer(palette = "Set1") +
-    theme(plot.subtitle = element_text(hjust = 0.5,
+    ggplot2::scale_colour_brewer(palette = "Set1") +
+    ggplot2::theme(plot.subtitle = ggplot2::element_text(hjust = 0.5,
                                        color = "#666666",
                                        size = 8),
-          plot.title = element_text(hjust = 0.5),
+          plot.title = ggplot2::element_text(hjust = 0.5),
           legend.position = "bottom")
 }
 
@@ -75,7 +76,7 @@ combine_speed_accel_values <- function(player_profile) {
   combine_speed_accel$combine_speed <- combine_speed_accel$speed * from_metric
   combine_speed_accel$combine_accel <- combine_speed_accel$acceleration * from_metric
   combine_speed_accel$combine_distance <- combine_speed_accel$distance
-  combine_speed_accel$player_label <- glue("{player_prof$player_name}
+  combine_speed_accel$player_label <- glue::glue("{player_prof$player_name}
        Theoretical Max Speed = {player_prof$theoretical_max_speed }
        Theoretical Max Accel = {player_prof$theoretical_max_accel }  ")
 

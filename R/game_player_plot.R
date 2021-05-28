@@ -25,14 +25,14 @@ game_player_plot.default <- function(game_profile, ...) {
   player_speed_accel_points <- do.call(rbind, lapply(game_data_list, game_speed_accel_values))
 
   p <- game_speed_accel_plot_base(game_profile, player_speed_accel_points) +
-    annotate("text", x = 1, y = 1,
+    ggplot2::annotate("text", x = 1, y = 1,
              label = "Built with {midsprint} by @aaronzpearson",
              colour = "white") +
-    geom_point(data = player_speed_accel_points,
-                aes(x = time_splits, y = game_accel, colour = player_label),
+    ggplot2::geom_point(data = player_speed_accel_points,
+                        ggplot2::aes(x = time_splits, y = game_accel, colour = player_label),
                 show.legend = TRUE, size = 1.5,alpha = 0.5) +
-    geom_point(data = player_speed_accel_points,
-               aes(x = time_splits, y = game_speed, colour = player_label),
+    ggplot2::geom_point(data = player_speed_accel_points,
+                        ggplot2::aes(x = time_splits, y = game_speed, colour = player_label),
                show.legend = FALSE, size = 1.5, alpha = 0.5)
 
   p
@@ -65,7 +65,7 @@ game_speed_accel_values <- function(player_profile) {
   game_speed_accel$game_speed <- game_speed_accel$speed * from_metric
   game_speed_accel$game_accel <- game_speed_accel$acceleration * from_metric
   game_speed_accel$game_distance <- game_speed_accel$distance
-  game_speed_accel$player_label <- glue("{player_prof$player_name}
+  game_speed_accel$player_label <- glue::glue("{player_prof$player_name}
        Max Speed = {player_prof$max_observed_speed }
        Max Accel = {player_prof$max_observed_accel }  ")
 
@@ -91,22 +91,24 @@ game_speed_accel_plot_base <- function(player_profile, player_speed_accel_points
 
   x_lab <- paste0("Time (", duration, ")")
 
-  ggplot() +
-    theme_classic() +
-    xlab(x_lab) + ylab(paste0("Speed (", distance, "/", duration, ")",
+  ggplot2::ggplot() +
+    ggplot2::theme_classic() +
+    ggplot2::xlab(x_lab) +
+    ggplot2::ylab(paste0("Speed (", distance, "/", duration, ")",
                               "\nAcceleration (", distance, "/", duration, "/", duration, ")")) +
-    xlim(c(0, 5)) + ylim(c(0, y_max)) +
+    ggplot2::xlim(c(0, 5)) +
+    ggplot2::ylim(c(0, y_max)) +
     # please do not edit
     # packages are tough to write and compile
     # this provides the author(s) with recognition
-    labs(title = "In-Game Speed and Acceleration Curves",
+    ggplot2::labs(title = "In-Game Speed and Acceleration Curves",
          subtitle = "Built with {midsprint} by @aaronzpearson",
          colour = "") +
     # distinct player colours
-    scale_colour_brewer(palette = "Set1") +
-    theme(plot.subtitle = element_text(hjust = 0.5,
+    ggplot2::scale_colour_brewer(palette = "Set1") +
+    ggplot2::theme(plot.subtitle = ggplot2::element_text(hjust = 0.5,
                                        color = "#666666",
                                        size = 8),
-          plot.title = element_text(hjust = 0.5),
+          plot.title = ggplot2::element_text(hjust = 0.5),
           legend.position = "bottom")
 }

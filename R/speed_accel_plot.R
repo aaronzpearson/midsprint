@@ -59,21 +59,21 @@ speed_accel_plot.default <- function(game_data, ...) {
 
     # build single player plot
     p <- sa_plot_base(game_data, max_s, max_a) +
-      annotate("text", x = 1, y = 1,
+      ggplot2::annotate("text", x = 1, y = 1,
                label = "Built with {midsprint} by @aaronzpearson",
                colour = "white") +
       # points from asample data
-      geom_point(data = game_data_sample,
-                 aes(x = game_speed, y = game_accel),
+      ggplot2::geom_point(data = game_data_sample,
+                          ggplot2::aes(x = game_speed, y = game_accel),
                  colour = "grey", alpha = 0.3) +
       # points from sa_plot_observations
       # returned in  original units
-      geom_point(data = player_speed_accel_points,
-                 aes(x = game_speed, y = game_accel, colour = player_label),
+      ggplot2::geom_point(data = player_speed_accel_points,
+                          ggplot2::aes(x = game_speed, y = game_accel, colour = player_label),
                  size = 2, show.legend = TRUE) +
       # linear fit to the sa_plot_observations
-      geom_smooth(data = player_speed_accel_points,
-                  aes(x = game_speed, y = game_accel, colour = player_label),
+      ggplot2::geom_smooth(data = player_speed_accel_points,
+                           ggplot2::aes(x = game_speed, y = game_accel, colour = player_label),
                   se = F, method = "lm", fullrange = T,
                   show.legend = FALSE, size = 1.5, alpha = 0.8)
 
@@ -81,12 +81,12 @@ speed_accel_plot.default <- function(game_data, ...) {
 
     # build multi-player plot
     p <- sa_plot_base(game_data, max_s, max_a) +
-      annotate("text", x = 1, y = 1,
+      ggplot2::annotate("text", x = 1, y = 1,
                label = "Built with {midsprint} by @aaronzpearson",
                colour = "white") +
       # linear fit to all players in the data set
-      geom_smooth(data = player_speed_accel_points,
-                  aes(x = game_speed, y = game_accel, colour = player_label),
+      ggplot2::geom_smooth(data = player_speed_accel_points,
+                           ggplot2::aes(x = game_speed, y = game_accel, colour = player_label),
                   se = F, method = "lm", fullrange = T,
                   show.legend = TRUE, size = 2)
 
@@ -128,23 +128,24 @@ sa_plot_base <- function(game_data, max_s = max_s, max_a = max_a) {
   x_lab <- paste0("Speed (", distance,"/", duration, ")")
 
   # build aesthetics of speed-accel plots
-  ggplot() +
-    theme_classic() +
-    xlab(x_lab) + ylab(y_lab) +
-    scale_x_continuous(expand = c(0, 0), limits = c(0, (max_s + 1)), breaks = seq(0, max_s, by = 2)) +
-    scale_y_continuous(expand = c(0, 0), limits = c(0, (max_a + 1)), breaks = seq(0, max_s, by = 2)) +
+  ggplot2::ggplot() +
+    ggplot2::theme_classic() +
+    ggplot2::xlab(x_lab) +
+    ggplot2::ylab(y_lab) +
+    ggplot2::scale_x_continuous(expand = c(0, 0), limits = c(0, (max_s + 1)), breaks = seq(0, max_s, by = 2)) +
+    ggplot2::scale_y_continuous(expand = c(0, 0), limits = c(0, (max_a + 1)), breaks = seq(0, max_s, by = 2)) +
     # please do not edit
     # packages are tough to write and compile
     # this provides the author(s) with recognition
-    labs(title = "In-Game Speed-Acceleration Model",
+    ggplot2::labs(title = "In-Game Speed-Acceleration Model",
          subtitle = "Built with {midsprint} by @aaronzpearson",
          colour = "") +
     # distinct player colours
-    scale_colour_brewer(palette = "Set1") +
-    theme(plot.subtitle = element_text(hjust = 0.5,
+    ggplot2::scale_colour_brewer(palette = "Set1") +
+    ggplot2::theme(plot.subtitle = ggplot2::element_text(hjust = 0.5,
                                        color = "#666666",
                                        size = 8),
-          plot.title = element_text(hjust = 0.5),
+          plot.title = ggplot2::element_text(hjust = 0.5),
           legend.position = "bottom")
 
 }
