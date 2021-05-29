@@ -85,7 +85,7 @@ speed_accel_plot.default <- function(game_data, ...) {
                label = "Built with {midsprint} by @aaronzpearson",
                colour = "white") +
       # linear fit to all players in the data set
-      ggplot2::geom_smooth(data = player_speed_accel_points,
+      ggplot2::geom_smooth(data = player_speed_accel_points, formula = y ~ x,
                            ggplot2::aes(x = game_speed, y = game_accel, colour = player_label),
                   se = F, method = "lm", fullrange = T,
                   show.legend = TRUE, size = 2)
