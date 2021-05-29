@@ -30,7 +30,7 @@ This package provides coaches with a low barrier of entry into athlete profiling
 
 * Speed-Acceleration 
 * Speed and acceleration over time from game data 
-* Speed and acceleration over time from Combine data
+* Speed and acceleration over time from combine data
 
 ### Current Updates
 
@@ -50,7 +50,7 @@ Finally, the updated vignette (walthrough) is more compact. The "must-knows" are
 
 To install midsprint, you'll need to copy and paste the following code into your 'Console'.
 
-```
+```{r install package, eval = F}
 devtools::install_github("aaronzpearson/midsprint")
 ```
 
@@ -76,7 +76,7 @@ To load your data, I suggest download the tidyverse package by typing "install.p
 #### In-Game Player Profiling
 
 Single player
-```
+```{r, eval = F}
 player_raw_data <- read.csv("path_to_data")
 player_game_data <- game_data(player_raw_data$speed, player_raw_data$acceleration,
                               units = "m/s", player_name = "John Doe")
@@ -85,7 +85,7 @@ player_game_visual <- game_player_plot(player_game_profile)
 ```
 
 Multiple players
-```
+```{r, eval = F}
 player_one <- read.csv("path_to_data_one")
 player_game_data_one <- game_data(player_one$speed, player_one$acceleration,
                               units = "m/s", player_name = "John Doe")
@@ -111,7 +111,7 @@ player_game_compare <- game_player_plot(player_game_profile_one,
 #### Speed-Acceleration Profile
 
 Single player
-```
+```{r, eval = F}
 player_raw_data <- read.csv("path_to_data")
 player_game_data <- game_data(player_raw_data$speed, player_raw_data$acceleration,
                               units = "m/s", player_name = "John Doe")
@@ -120,7 +120,7 @@ player_speed_accel_plot <- speed_accel_plot(player_game_data)
 ```
 
 Multiple players
-```
+```{r, eval = F}
 player_one <- read.csv("path_to_data_one")
 player_game_data_one <- game_data(player_one$speed, player_one$acceleration,
                               units = "m/s", player_name = "John Doe")
@@ -138,7 +138,7 @@ player_speed_accel_plot_compare <- speed_accel_plot(player_game_data_one,
 #### 40 yard dash/ NFL Combine Profile
 
 Single player
-```
+```{r, eval = F}
 player_raw_data <- read.csv("path_to_data")
 player_combine_data <- combine_data(player_raw_data$speed, player_raw_data$acceleration,
                               units = "yd/s", player_name = "John Doe")
@@ -147,7 +147,7 @@ player_combine_visual <- combine_player_plot(player_combine_profile)
 ```
 
 Multiple players
-```
+```{r, eval = F}
 player_one <- read.csv("path_to_data_one")
 player_combine_data_one <- combine_data(player_one$speed, player_one$acceleration,
                               units = "yd/s", player_name = "John Doe")
@@ -173,7 +173,7 @@ The report functions between `start_report()` and `save_report()` cannot be obje
 
 When the report pipeline is built, highlight and run the entire chunk of code.
 
-```
+```{r, eval = F}
 start_report("my_report_name.pdf") # do not include .pdf at the end of the report name
 
 game_report(game_profile_one) # single player game report on page 1
