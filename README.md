@@ -39,7 +39,7 @@ Please see "Welcome to {midsprint}" for a simple walkthrough.
 
 Please see "sample_report.pdf" for an example of what you can create in minutes.
 
-Note: when using {midsprint} in your published work, please run `citation(midsprint)` for formatting.
+Note: when using {midsprint} in your published work, please run `citation("midsprint")` for formatting.
 
 ### Contact
 
