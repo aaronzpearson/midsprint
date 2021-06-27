@@ -24,7 +24,7 @@ speed_accel <- function(game_data, R) {
   }
 
 #' @export
-speed_accel.default <- function(game_data, R) {
+speed_accel.default <- function(game_data, R = 0.95) {
 
   r2 = R
   # sa_muted return speed-accel values, no output
@@ -68,7 +68,7 @@ accel_speed <- function(game_data) {
 # No documentation is provided for these function
 # All function information is included within the function as a comment
 
-sa_muted <- function(game_data, R) {
+sa_muted <- function(game_data, R = 0.95) {
   # returns speed-accel values without a a printout to the console
 
   df_temp <- sa_metric_observations(game_data)
