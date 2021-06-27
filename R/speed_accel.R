@@ -2,6 +2,7 @@
 #' Speed-Acceleration Model
 #'
 #' @param game_data An athlete's game data.
+#' @param R custom r^2 value for the model
 #'
 #' @return An athlete's theoretical max speed and max accel.
 #'
@@ -16,17 +17,18 @@
 #'
 #' You can also call upon accel_speed for the same output.
 #' @export
-speed_accel <- function(game_data) {
+speed_accel <- function(game_data, R) {
 
   UseMethod("speed_accel")
 
   }
 
 #' @export
-speed_accel.default <- function(game_data) {
+speed_accel.default <- function(game_data, R) {
 
+  r2 = R
   # sa_muted return speed-accel values, no output
-  df <- sa_muted(game_data)
+  df <- sa_muted(game_data, R = r2)
 
   base_unit <- strsplit(game_data$units[1], "/")[[1]][1]
   base_duration <- strsplit(game_data$units[1], "/")[[1]][2]
@@ -66,7 +68,7 @@ accel_speed <- function(game_data) {
 # No documentation is provided for these function
 # All function information is included within the function as a comment
 
-sa_muted <- function(game_data) {
+sa_muted <- function(game_data, R) {
   # returns speed-accel values without a a printout to the console
 
   df_temp <- sa_metric_observations(game_data)
@@ -79,7 +81,7 @@ sa_muted <- function(game_data) {
 
   # while-loop fits the speed-accel model
   # continues until r_squared value is greater than, or equal to 0.95
-  while (r_square <= 0.95) {
+  while (r_square <= R) {
     df_temp$fit_predict <- y_int + (slope * df_temp$speed)
     df_temp$diff_predict <- abs(df_temp$accel - df_temp$fit_predict)
     df_temp <- df_temp[order(df_temp$diff_predict), ]
